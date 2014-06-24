@@ -1,0 +1,4 @@
+.bundle
+.DS_Store
+.ruby-version
+db/*.db

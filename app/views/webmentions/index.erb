@@ -1,0 +1,10 @@
+<ol>
+	<% @webmentions.each do |webmention| %>
+		<li>
+			<a href="<%= webmention_url(webmention.id) %>">
+				<time class="dt-start" datetime="<%= webmention.created_at.strftime('%Y-%m-%d %H:%M') %>"><%= webmention.created_at.strftime('At %H:%M on %-d %B %Y') %></time>
+			</a>,
+			<%= link_to 'this URL', webmention.source, rel: 'nofollow', title: webmention.source %> mentioned <%= link_to 'that URL', webmention.target, title: webmention.target %>.
+		</li>
+	<% end %>
+</ol>

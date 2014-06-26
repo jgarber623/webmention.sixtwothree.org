@@ -4,13 +4,13 @@
 #
 # The default is the current directory.
 #
-directory '/var/www/webmention.sixtwothree.org'
+directory '/var/www/webmention.sixtwothree.org/current'
 
 # Load “path” as a rackup file.
 #
 # The default is “config.ru”.
 #
-# rackup '/var/www/webmention.sixtwothree.org/config.ru'
+rackup '/var/www/webmention.sixtwothree.org/current/config.ru'
 
 # Set the environment in which the rack's app will run. The value must be a string.
 #
@@ -23,6 +23,7 @@ environment 'production'
 #
 # The default is “false”.
 #
+# daemonize
 # daemonize false
 daemonize
 
@@ -39,8 +40,8 @@ state_path '/var/www/webmention.sixtwothree.org/shared/pids/puma.state'
 # (“append”) specifies whether the output is appended, the default is
 # “false”.
 #
-stdout_redirect '/var/www/webmention.sixtwothree.org/shared/log/stdout.log', '/var/www/webmention.sixtwothree.org/shared/log/stderr.log'
 # stdout_redirect '/u/apps/lolcat/log/stdout', '/u/apps/lolcat/log/stderr', true
+stdout_redirect '/var/www/webmention.sixtwothree.org/shared/log/stdout.log', '/var/www/webmention.sixtwothree.org/shared/log/stderr.log'
 
 # Disable request logging.
 #
@@ -61,9 +62,10 @@ stdout_redirect '/var/www/webmention.sixtwothree.org/shared/log/stdout.log', '/v
 # The default is “tcp://0.0.0.0:9292”.
 #
 # bind 'tcp://0.0.0.0:9292'
-bind 'unix:///var/run/puma.sock'
+# bind 'unix:///var/run/puma.sock'
 # bind 'unix:///var/run/puma.sock?umask=0777'
 # bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'
+bind 'unix:///var/www/webmention.sixtwothree.org/shared/pids/puma.sock'
 
 # Instead of “bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'” you
 # can also use the “ssl_bind” option.

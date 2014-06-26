@@ -6,9 +6,9 @@ gem 'sqlite3'
 gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'mechanize'
+gem 'puma'
 
 group :development do
-  gem 'rake'
-  gem 'shotgun'
+  gem 'capistrano', '~> 2.15.5'
   gem 'tux'
 end

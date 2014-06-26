@@ -4,7 +4,7 @@
 			<time class="dt-published dt-start" datetime="<%= @webmention.created_at.strftime('%Y-%m-%d %H:%M') %>"><%= @webmention.created_at.strftime('At %H:%M on %-d %B %Y') %></time>,
 			<%= link_to 'this URL', @webmention.source, rel: 'nofollow', title: @webmention.source %> mentioned <%= link_to 'that URL', @webmention.target, title: @webmention.target %>.
 		</p>
-		<p>This webmention is <i><%= @webmention.verified ? 'verified' : 'unverified' %></i>.</p>
+		<p>This webmention is <i><%= @webmention.verified? ? 'verified' : 'unverified' %></i>.</p>
 	</div>
 
 	<footer class="meta">

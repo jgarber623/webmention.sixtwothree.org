@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624134554) do
+ActiveRecord::Schema.define(version: 20140626150748) do
 
   create_table "webmentions", force: true do |t|
     t.string   "source"
     t.string   "target"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "verified",    default: false
     t.datetime "verified_at"
   end
 

@@ -12,7 +12,11 @@ class WebmentionApp < Sinatra::Base
     else
       status 202
 
-      webmention = Webmention.new({ source: params[:source], target: params[:target] })
+      if webmention = Webmention.where(source: source, target: target).first
+        webmention.verified_at = nil
+      else
+        webmention = Webmention.new({ source: source, target: target })
+      end
 
       if webmention.save
         erb "#{base_url}/webmentions/#{webmention.id}", layout: false

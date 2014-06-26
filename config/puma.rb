@@ -65,7 +65,7 @@ stdout_redirect '/var/www/webmention.sixtwothree.org/shared/log/stdout.log', '/v
 # bind 'unix:///var/run/puma.sock'
 # bind 'unix:///var/run/puma.sock?umask=0777'
 # bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'
-bind 'unix:///var/www/webmention.sixtwothree.org/shared/pids/puma.sock'
+bind 'tcp://0.0.0.0:9292'
 
 # Instead of “bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'” you
 # can also use the “ssl_bind” option.

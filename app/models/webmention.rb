@@ -1,6 +1,7 @@
 class Webmention < ActiveRecord::Base
   validates_presence_of :source, :target
-  validates_format_of   :source, :target, :with => URI::regexp(%w(http https))
+  validates_format_of   :source, :with => URI::regexp(%w(http https))
+  validates_format_of   :target, :with => /\Ahttp:\/\/sixtwothree.org(\/?)/
 
   def verified?
     !verified_at.nil?
@@ -9,7 +10,6 @@ class Webmention < ActiveRecord::Base
   def verify
     agent = Mechanize.new
 
-    # [ ] verify that source and target are valid URLs?
     # [ ] verify that target exists and accepts webmentions
     # [x] verify that source links to target
     # [ ] if source does not link to target (410 or no link_with), delete webmention

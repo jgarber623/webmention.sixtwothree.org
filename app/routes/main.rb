@@ -10,8 +10,6 @@ class WebmentionApp < Sinatra::Base
     if source.nil? || target.nil?
       status 400
     else
-      status 202
-
       if webmention = Webmention.where(source: source, target: target).first
         webmention.verified_at = nil
       else
@@ -19,7 +17,11 @@ class WebmentionApp < Sinatra::Base
       end
 
       if webmention.save
+        status 202
+
         erb "#{base_url}/webmentions/#{webmention.id}", layout: false
+      else
+        status 400
       end
     end
   end

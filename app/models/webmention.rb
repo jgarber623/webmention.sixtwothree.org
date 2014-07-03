@@ -21,7 +21,7 @@ class Webmention < ActiveRecord::Base
         target.sub! 'http://sixtwothree.org/', '/'
       end
 
-      if body.link_with(href: %r{#{target}|#{target.sub(/\/+?$/, '')}}).present?
+      if body.link_with(href: %r{#{target}|#{target.sub(/.*\/+?$/, '')}}).present?
         update_attribute(:verified_at, Time.now.utc)
       end
     end

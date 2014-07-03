@@ -1,5 +1,4 @@
 .bundle
 .DS_Store
-.ruby-version
 config/deploy/*.rb
 db/*.db

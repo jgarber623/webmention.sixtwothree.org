@@ -7,9 +7,9 @@ gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'mechanize'
 gem 'puma'
+gem 'tux'
 
 group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'shotgun'
-  gem 'tux'
 end

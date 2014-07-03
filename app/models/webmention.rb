@@ -12,10 +12,15 @@ class Webmention < ActiveRecord::Base
 
     # [ ] verify that target exists and accepts webmentions
     # [x] verify that source links to target
+    # [x] if source and target are on same domain, support relative URLs
     # [ ] if source does not link to target (410 or no link_with), delete webmention
 
     if body = agent.get(source)
-      if !body.link_with(href: target).nil?
+      if URI.parse(source).host == URI.parse(target).host
+        target.sub! 'http://sixtwothree.org/', '/'
+      end
+
+      if body.link_with(href: target).present?
         update_attribute(:verified_at, Time.now.utc)
       end
     end

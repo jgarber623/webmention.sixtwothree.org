@@ -11,16 +11,15 @@ class Webmention < ActiveRecord::Base
     agent = Mechanize.new
 
     # [ ] verify that target exists and accepts webmentions
-    # [x] verify that source links to target
-    # [x] if source and target are on same domain, support relative URLs
-    # [x] account for target with and without trailing slash in URL
     # [ ] if source does not link to target (410 or no link_with), delete webmention
 
     if body = agent.get(source)
+      # If source and target are on the same domain, target should be relative
       if URI.parse(source).host == URI.parse(target).host
         target.sub! 'http://sixtwothree.org/', '/'
       end
 
+      # Verify that source links to target (with or without trailing slash)
       if body.link_with(href: %r{#{target}|#{target.sub(/.*\/+?$/, '')}}).present?
         update_attribute(:verified_at, Time.now.utc)
       end

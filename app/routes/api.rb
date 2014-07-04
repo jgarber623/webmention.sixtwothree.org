@@ -5,7 +5,7 @@ class WebmentionApp < Sinatra::Base
 
   get '/api/webmentions' do
     if params[:target]
-      webmentions = Webmention.where(target: URI.unescape(params[:target]))
+      webmentions = Webmention.where(target: params[:target])
     else
       webmentions = Webmention.all
     end

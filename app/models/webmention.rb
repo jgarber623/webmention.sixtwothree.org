@@ -10,6 +10,8 @@ class Webmention < ActiveRecord::Base
   def verify
     agent = Mechanize.new
 
+    agent.user_agent = 'http://sixtwothree.org/ (http://webmention.org/)'
+
     # If source and target are on the same domain, target should be relative
     if URI.parse(source).host == URI.parse(target).host
       target.sub! 'http://sixtwothree.org/', '/'

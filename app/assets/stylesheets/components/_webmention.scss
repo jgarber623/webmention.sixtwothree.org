@@ -1,0 +1,30 @@
+.webmention {
+	border-bottom: 0.5em solid palette(grey, x-light);
+	margin-bottom: 2.5em;
+	padding-bottom: 2.5em;
+
+	&--single {
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+}
+
+.webmention-title {
+	@include font-size(xx-large);
+	line-height: 1.2;
+	margin: 0;
+	text-align: center;
+
+	@include breakpoint($break--narrow) {
+		@include font-size(xxx-large);
+	}
+
+	a {
+		color: palette(grey, x-dark);
+		text-decoration: none;
+	}
+}
+
+.webmention-content {
+	margin: 3em 0;
+}

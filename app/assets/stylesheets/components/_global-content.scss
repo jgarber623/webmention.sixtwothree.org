@@ -1,0 +1,42 @@
+.global-content {
+	margin: 6.625em 0 4em 0;
+
+	@include breakpoint($break--narrow) {
+		margin-top: 7.625em;
+	}
+
+	p {
+		@include font-size;
+		line-height: 1.6;
+		margin: 1.5em 0;
+
+		@include breakpoint($break--wide) {
+			@include font-size(large);
+		}
+	}
+
+	pre {
+		background: palette(grey, x-light);
+		margin: 3em 0;
+		overflow-x: scroll;
+		padding: 1em;
+		width: 100%;
+	}
+
+	[data-verified] {
+		background: palette(red);
+		border-radius: 0.25em;
+		box-shadow: inset 0 -1px 0 rgba(palette(red, dark), 0.5);
+		color: #fff;
+		display: inline-block;
+		margin: -0.05em 0.25em;
+		padding: 0.05em 0.5em;
+		text-shadow: 1px 1px 0 rgba(palette(red, dark), 0.5);
+	}
+
+	[data-verified="true"] {
+		background: palette(green);
+		box-shadow: inset 0 -1px 0 rgba(palette(green, dark), 0.5);
+		text-shadow: 1px 1px 0 rgba(palette(green, dark), 0.5);
+	}
+}

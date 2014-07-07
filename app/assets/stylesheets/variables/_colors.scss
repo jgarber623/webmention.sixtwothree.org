@@ -1,0 +1,25 @@
+$green: #0a0;
+$grey: #777;
+$red: #c00;
+
+$palettes: (
+	blue: (
+		light: #4678b9,
+		dark: #465a78
+	),
+	green: (
+		base: $green,
+		dark: darken($green, 25%)
+	),
+	grey: (
+		x-light: lighten($grey, 48%),
+		light: lighten($grey, 10%),
+		base: $grey,
+		dark: darken($grey, 10%),
+		x-dark: darken($grey, 27%)
+	),
+	red: (
+		base: $red,
+		dark: darken($red, 25%)
+	)
+);

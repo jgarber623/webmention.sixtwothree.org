@@ -1,11 +1,13 @@
-<h1>Webmentions</h1>
+<header class="content-header">
+	<h1>Webmentions</h1>
+</header>
 
-<ol reversed>
+<ol class="webmentions-list" reversed>
 	<% @webmentions.each do |webmention| %>
-		<li class="h-entry h-event">
+		<li class="webmention h-entry h-event">
 			<div class="e-content p-description">
 				<%= erb :'webmentions/_details', locals: { webmention: webmention } %>
-				<small><%= link_to 'View details', webmention_url(webmention.id), class: 'u-url' %></small>
+				<small><%= link_to 'View details →', webmention_url(webmention.id), class: 'u-url' %></small>
 			</div>
 		</li>
 	<% end %>

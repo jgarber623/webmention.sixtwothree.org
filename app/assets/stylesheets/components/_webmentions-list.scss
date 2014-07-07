@@ -1,0 +1,19 @@
+.webmentions-list {
+	@extend %ui-list;
+	margin: 3em 0;
+
+	.webmention p {
+		@include font-size(small);
+		margin: 0 0 0.5em 0;
+
+		@include breakpoint($tweak--medium) {
+			@include font-size;
+			margin: 0 0 1em 0;
+		}
+	}
+
+	small {
+		display: block;
+		@include font-size(x-small);
+	}
+}

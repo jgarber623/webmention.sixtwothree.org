@@ -1,8 +1,8 @@
-<article class="h-entry h-event">
-	<h1 class="p-name"><%= link_to "Webmention ##{@webmention.id}", webmention_url(@webmention.id), class: 'u-url' %></h1>
+<article class="webmention--single webmention h-entry h-event">
+	<h1 class="webmention-title p-name"><%= link_to "Webmention ##{@webmention.id}", webmention_url(@webmention.id), class: 'u-url' %></h1>
 
-	<div class="e-content p-description">
+	<div class="webmention-content e-content p-description">
 		<%= erb :'webmentions/_details', locals: { webmention: @webmention } %>
-		<p>This webmention is <i><%= @webmention.verified? ? 'verified' : 'unverified' %></i>.</p>
+		<p>This webmention is <span data-verified="<%= @webmention.verified? %>"><%= @webmention.verified? ? 'verified' : 'unverified' %></span>.</p>
 	</div>
 </article>

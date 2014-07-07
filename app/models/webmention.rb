@@ -17,10 +17,10 @@ class Webmention < ActiveRecord::Base
       target.sub! 'http://sixtwothree.org/', '/'
     end
 
-    # Verify that source links to target (with or without trailing slash)
-    body = agent.get(source)
+    source_body = agent.get(source)
 
-    if body.link_with(href: %r{#{target}|#{target.sub(/.*\/+?$/, '')}}).present?
+    # Verify that source links to target (with or without trailing slash)
+    if source_body.link_with(href: %r{#{target}|#{target.sub(/.*\/+?$/, '')}}).present?
       update_attribute(:verified_at, Time.now.utc)
     else
       delete

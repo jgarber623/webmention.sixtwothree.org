@@ -9,13 +9,13 @@ class WebmentionApp < Sinatra::Base
         webmentions = Webmention.all
       end
 
-      erb webmentions.to_json, layout: false
+      json webmentions
     end
 
     get '/webmentions/:id' do
       webmention = Webmention.where(id: params[:id])
 
-      erb webmention.to_json, layout: false
+      json webmention
     end
   end
 end

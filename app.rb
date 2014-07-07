@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/asset_pipeline'
 require 'sinatra/content_for'
+require 'sinatra/json'
 require 'sinatra/namespace'
 require 'mechanize'
 
@@ -15,6 +16,7 @@ class WebmentionApp < Sinatra::Base
   set :assets_prefix, %w(app/assets)
 
   helpers Sinatra::ContentFor
+  helpers Sinatra::JSON
 
   register Sinatra::AssetPipeline
   register Sinatra::Namespace

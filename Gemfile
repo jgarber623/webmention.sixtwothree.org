@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 # Application, etc.
 gem 'sinatra'
+gem 'sinatra-contrib'
 gem 'puma'
 gem 'mechanize'
 gem 'tux'

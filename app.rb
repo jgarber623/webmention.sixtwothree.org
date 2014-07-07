@@ -1,11 +1,14 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/asset_pipeline'
+require 'sinatra/content_for'
 require 'mechanize'
 
 configure { set :server, :puma }
 
 class WebmentionApp < Sinatra::Base
+  helpers Sinatra::ContentFor
+
   set :views, "#{settings.root}/app/views"
 
   set :assets_css_compressor, :sass

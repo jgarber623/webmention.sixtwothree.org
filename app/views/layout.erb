@@ -17,7 +17,7 @@
 <body>
 
 	<div class="layout-container">
-		<main class="global-content" role="main">
+		<main class="global-content <%= yield_content :global_content_classes %>" role="main">
 			<%= yield %>
 		</main>
 

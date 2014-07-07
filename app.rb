@@ -6,6 +6,7 @@ require 'mechanize'
 configure { set :server, :puma }
 
 class WebmentionApp < Sinatra::Base
+  set :assets_precompile, %w(application.css)
   set :assets_prefix, %w(app/assets)
   set :views, "#{settings.root}/app/views"
 

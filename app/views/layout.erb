@@ -3,78 +3,26 @@
 <head>
 	<meta charset="utf-8">
 
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+
 	<title><%= "#{@page_title} — " if @page_title %>Webmentions — sixtwothree.org</title>
 
+	<meta name="description" content="This is the webmention endpoint for sixtwothree.org.">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<style>
-		body {
-			color: #333;
-			font-family: Georgia, serif;
-			margin: 0;
-			padding: 5em 1em;
-		}
-
-		p {
-			font-size: 1.5em;
-			line-height: 1.5;
-			margin: 1.5em 0;
-			text-align: center;
-		}
-
-		li {
-			font-size: 1.25em;
-			line-height: 1.5;
-			margin: 1em 0;
-		}
-
-		a {
-			color: #c00;
-			font-style: italic;
-			text-decoration: underline;
-			white-space: nowrap;
-		}
-
-		a:focus,
-		a:hover {
-			color: #e00;
-		}
-
-		.content {
-			margin: 0 auto;
-			max-width: 46em;
-		}
-
-		.content > :first-child,
-		.content p:first-child,
-		.content li:first-child {
-			margin-top: 0;
-		}
-
-		.meta {
-			border-top: 0.125em solid #eee;
-			margin: 5em auto 0 auto;
-			padding-top: 1.5em;
-		}
-
-		.meta p {
-			font-size: 1em;
-			margin: 0;
-		}
-
-		.meta a {
-			display: inline-block;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			width: 100%;
-		}
-	</style>
+	<link rel="shortcut icon" href="/jgarber.png">
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:700|Source+Sans+Pro:400">
 </head>
 <body>
 
 	<main class="content" role="main">
 		<%= yield %>
 	</main>
+
+	<footer role="contentinfo">
+		<div class="back-link"><%= link_to '← Back to sixtwothree.org', 'http://sixtwothree.org' %></div>
+		<p class="license">Some rights reserved. This site’s content is licensed under a <%= link_to 'Creative Commons Attribution-NonCommercial-ShareAlike 3.0 license', 'http://creativecommons.org/licenses/by-nc-sa/3.0/', rel: 'license' %>.</p>
+	</footer>
 
 </body>
 </html>

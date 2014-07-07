@@ -1,10 +1,12 @@
-<ol>
+<h1>Webmentions</h1>
+
+<ol reversed>
 	<% @webmentions.each do |webmention| %>
-		<li>
-			<a href="<%= webmention_url(webmention.id) %>">
-				<time class="dt-start" datetime="<%= webmention.created_at.strftime('%Y-%m-%d %H:%M') %>"><%= webmention.created_at.strftime('At %H:%M on %-d %B %Y') %></time>
-			</a>,
-			<%= link_to 'this URL', webmention.source, rel: 'nofollow', title: webmention.source %> mentioned <%= link_to 'that URL', webmention.target, title: webmention.target %>.
+		<li class="h-entry h-event">
+			<div class="e-content p-description">
+				<%= erb :'webmentions/_details', locals: { webmention: webmention } %>
+				<small><%= link_to 'View details', webmention_url(webmention.id), class: 'u-url' %></small>
+			</div>
 		</li>
 	<% end %>
 </ol>

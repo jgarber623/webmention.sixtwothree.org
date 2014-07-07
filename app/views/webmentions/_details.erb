@@ -1,0 +1,4 @@
+<p>
+	On <time class="dt-start" datetime="<%= webmention.created_at.to_s(:iso8601) %>"><%= webmention.created_at.strftime('%B %-d, %Y at %l:%M %P %Z') %></time>,
+	<%= link_to 'this URL', webmention.source, rel: 'nofollow', title: webmention.source %> mentioned <%= link_to 'that URL', webmention.target, title: webmention.target %>.
+</p>

@@ -3,10 +3,13 @@ def base_url
 end
 
 def link_to(body, url, html_options = {})
-  attributes = ''
-  html_options.each {|key, value| attributes << key.to_s << '="' << value << '"'}
+  attributes = []
 
-  "<a href=\"#{url}\" #{attributes}>#{body}</a>"
+  html_options.each_pair do |key, value|
+    attributes << %(#{key}="#{value}")
+  end
+
+  "<a href=\"#{url}\" #{attributes.sort * ' '}>#{body}</a>"
 end
 
 def webmention_url(id)

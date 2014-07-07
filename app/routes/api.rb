@@ -1,21 +1,21 @@
 class WebmentionApp < Sinatra::Base
-  before '/api/*' do
-    content_type :json
-  end
+  namespace '/api' do
+    before { content_type :json }
 
-  get '/api/webmentions' do
-    if params[:target]
-      webmentions = Webmention.where(target: params[:target])
-    else
-      webmentions = Webmention.all
+    get '/webmentions' do
+      if params[:target]
+        webmentions = Webmention.where(target: params[:target])
+      else
+        webmentions = Webmention.all
+      end
+
+      erb webmentions.to_json, layout: false
     end
 
-    erb webmentions.to_json, layout: false
-  end
+    get '/webmentions/:id' do
+      webmention = Webmention.where(id: params[:id])
 
-  get '/api/webmentions/:id' do
-    webmention = Webmention.where(id: params[:id])
-
-    erb webmention.to_json, layout: false
+      erb webmention.to_json, layout: false
+    end
   end
 end

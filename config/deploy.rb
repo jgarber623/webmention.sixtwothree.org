@@ -10,7 +10,7 @@ set :repository, 'git@github.com:jgarber623/webmention.sixtwothree.org.git'
 set :deploy_to, '/var/www/webmention.sixtwothree.org'
 set :user, 'www-data'
 set :deploy_via, :remote_cache
-set :ssh_options, {forward_agent: true}
+set :ssh_options, { forward_agent: true }
 set :use_sudo, false
 set :normalize_asset_timestamps, false
 

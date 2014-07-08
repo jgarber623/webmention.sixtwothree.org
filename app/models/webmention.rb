@@ -12,12 +12,7 @@ class Webmention < ActiveRecord::Base
 
     agent.user_agent = 'http://sixtwothree.org/ (http://webmention.org/)'
 
-    # If source and target are on the same domain, target should be relative
-    if URI.parse(source).host == URI.parse(target).host
-      target.sub! 'http://sixtwothree.org/', '/'
-    end
-
-    if source_links_to_target?(agent.get(source))
+    if target_accepts_webmentions?(agent.get(target)) && source_links_to_target?(agent.get(source))
       update_attribute(:verified_at, Time.now.utc)
     else
       delete
@@ -34,8 +29,25 @@ class Webmention < ActiveRecord::Base
 
   private
 
-  def source_links_to_target?(body)
+  def source_links_to_target?(page)
+    # If source and target are on the same domain, target should be relative
+    if URI.parse(source).host == URI.parse(target).host
+      target.sub! 'http://sixtwothree.org/', '/'
+    end
+
     # Verify that source links to target (with or without trailing slash)
-    body.link_with(href: %r{#{target}|#{target.sub(/.*\/+?$/, '')}}).present?
+    page.link_with(href: %r{#{target}|#{target.sub(/.*\/+?$/, '')}}).present?
+  end
+
+  def target_accepts_webmentions?(page)
+    if page.header.key? 'link'
+      # Search for endpoint in Link header
+      supported = page.header['link'].match(/<((?:https?:\/\/)?[^>]+)>; rel="(?:[^>]*\s+|\s*)(?:webmention|http:\/\/webmention.org\/?)(?:\s*|\s+[^>]*)"/i)
+    else
+      # Search for endpoint in <link> and <a> elements
+      supported = page.search('link[rel~="webmention"]', 'link[rel~="http://webmention.org/"]', 'a[rel~="webmention"]', 'a[rel~="http://webmention.org/"]').first
+    end
+
+    supported
   end
 end

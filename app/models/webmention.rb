@@ -1,7 +1,7 @@
 class Webmention < ActiveRecord::Base
   validates_presence_of :source, :target
   validates_format_of   :source, :with => URI::regexp(%w(http https))
-  validates_format_of   :target, :with => /\Ahttp:\/\/sixtwothree.org(\/?)/
+  validates_format_of   :target, :with => %r{\Ahttp://sixtwothree.org/?}
 
   def verified?
     !verified_at.nil?

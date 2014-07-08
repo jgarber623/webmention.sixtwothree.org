@@ -8,7 +8,7 @@ class WebmentionApp < Sinatra::Base
 
     get '/:id' do
       if @webmention = Webmention.find(params[:id])
-        @page_title = @webmention.created_at.strftime('%FT%T%:z')
+        @page_title = @webmention.created_at.to_s(:iso8601)
 
         erb :'webmentions/show'
       else

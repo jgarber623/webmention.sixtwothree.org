@@ -1,3 +1,4 @@
+require 'active_support/all'
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/asset_pipeline'
@@ -7,6 +8,8 @@ require 'sinatra/namespace'
 require 'mechanize'
 
 configure { set :server, :puma }
+
+Dir.glob('./config/initializers/*.rb', &method(:require))
 
 class WebmentionApp < Sinatra::Base
   set :views, "#{settings.root}/app/views"

@@ -19,7 +19,11 @@ class WebmentionApp < Sinatra::Base
       if webmention.save
         status 202
 
-        erb "#{base_url}/webmentions/#{webmention.id}", layout: false
+        if params[:referer] == 'sixtwothree.org'
+          redirect to("/webmentions/#{webmention.id}")
+        else
+          erb "#{base_url}/webmentions/#{webmention.id}", layout: false
+        end
       else
         status 400
       end

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626150748) do
+ActiveRecord::Schema.define(version: 20140823180517) do
+
+  create_table "webmention_sources", force: true do |t|
+    t.integer  "webmention_id"
+    t.text     "html"
+    t.text     "json"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "webmentions", force: true do |t|
     t.string   "source"

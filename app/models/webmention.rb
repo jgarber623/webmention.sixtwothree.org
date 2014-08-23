@@ -1,4 +1,6 @@
 class Webmention < ActiveRecord::Base
+  has_one :webmention_source, dependent: :destroy
+
   validates :source, :target, presence: true
   validates :source, format: { :with => URI::regexp(%w(http https)) }
   validates :target, format: { :with => %r{\Ahttp://sixtwothree.org/?} }
@@ -12,8 +14,16 @@ class Webmention < ActiveRecord::Base
 
     agent.user_agent = 'http://sixtwothree.org/ (http://webmention.org/)'
 
-    if target_accepts_webmentions?(agent.get(target)) && source_links_to_target?(agent.get(source))
+    if target_accepts_webmentions?(agent.get(target)) && source_links_to_target?(source_page = agent.get(source))
       update_attribute(:verified_at, Time.now.utc)
+
+      webmention_source = WebmentionSource.new({
+        webmention_id: id,
+        html: source_page.body,
+        json: Microformats2.parse(source_page.body).to_json
+      })
+
+      webmention_source.save
     else
       delete
     end

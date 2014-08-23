@@ -6,6 +6,7 @@ require 'sinatra/content_for'
 require 'sinatra/json'
 require 'sinatra/namespace'
 require 'mechanize'
+require 'microformats2'
 
 configure { set :server, :puma }
 

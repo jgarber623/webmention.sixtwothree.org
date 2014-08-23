@@ -6,6 +6,7 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'puma'
 gem 'mechanize'
+gem 'microformats2'
 gem 'tux'
 
 # Database, etc.

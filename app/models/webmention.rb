@@ -14,7 +14,9 @@ class Webmention < ActiveRecord::Base
 
     agent.user_agent = 'http://sixtwothree.org/ (http://webmention.org/)'
 
-    if target_accepts_webmentions?(agent.get(target)) && source_links_to_target?(source_page = agent.get(source))
+    source_page = agent.get(source)
+
+    if target_accepts_webmentions?(agent.get(target)) && source_links_to_target?(source_page)
       update_attribute(:verified_at, Time.now.utc)
 
       webmention_source = WebmentionSource.new({

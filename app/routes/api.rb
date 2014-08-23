@@ -13,7 +13,7 @@ class WebmentionApp < Sinatra::Base
     end
 
     get '/webmentions/:id' do
-      webmention = Webmention.where(id: params[:id]).first
+      webmention = Webmention.where(id: params[:id])
 
       json webmention
     end

@@ -5,6 +5,10 @@ class Webmention < ActiveRecord::Base
   validates :source, format: { :with => URI::regexp(%w(http https)) }
   validates :target, format: { :with => %r{\Ahttp://sixtwothree.org/?} }
 
+  def as_json(options = {})
+    attributes.merge(item: Microformats2.parse(webmention_source.html).entries.first)
+  end
+
   def verified?
     !verified_at.nil?
   end

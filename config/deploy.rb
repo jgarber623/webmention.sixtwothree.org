@@ -44,3 +44,9 @@ namespace :deploy do
     run "ln -s #{shared_path}/db/webmentions.db #{release_path}/db/webmentions.db"
   end
 end
+
+namespace :sync do
+  task :db do
+    download "#{shared_path}/db/webmentions.db", "./db/webmentions.db"
+  end
+end

@@ -24,8 +24,8 @@ class Webmention < ActiveRecord::Base
       collection = Microformats2.parse(source_page.body)
       entry_properties = collection.entries.first.to_hash[:properties]
 
-      # update_attributes(verified_at: Time.now.utc, webmention_type: get_type(entry_properties))
       update_attribute(:verified_at, Time.now.utc)
+      update_attribute(:webmention_type, get_type(entry_properties))
 
       webmention_source = WebmentionSource.new({
         webmention_id: id,

@@ -24,8 +24,7 @@ class Webmention < ActiveRecord::Base
       collection = Microformats2.parse(source_page.body)
       entry_properties = collection.entries.first.to_hash[:properties]
 
-      update_attribute(:verified_at, Time.now.utc)
-      update_attribute(:webmention_type, get_type(entry_properties))
+      update_attributes(verified_at: Time.now.utc, webmention_type: get_type(entry_properties))
 
       webmention_source = WebmentionSource.new({
         webmention_id: id,
@@ -62,13 +61,15 @@ class Webmention < ActiveRecord::Base
   end
 
   def source_links_to_target?(page)
-    # If source and target are on the same domain, target should be relative
     if URI.parse(source).host == URI.parse(target).host
-      target.sub! 'http://sixtwothree.org/', '/'
+      # If source and target are on the same domain, target should be relative
+      link_found = page.link_with(href: %r{#{target}|#{target.sub('http://sixtwothree.org/', '/')}}).present?
+    else
+      # Check for links to target (with or without trailing slash)
+      link_found = page.link_with(href: %r{#{target}|#{target.sub(/.*\/+?$/, '')}}).present?
     end
 
-    # Verify that source links to target (with or without trailing slash)
-    page.link_with(href: %r{#{target}|#{target.sub(/.*\/+?$/, '')}}).present?
+    link_found
   end
 
   def target_accepts_webmentions?(page)

@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140824010041) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "verified_at"
-    t.string   "webmention_type", default: "reference"
+    t.string   "webmention_type"
   end
 
 end

@@ -6,7 +6,7 @@ class Webmention < ActiveRecord::Base
   validates :target, format: { :with => %r{\Ahttp://sixtwothree.org/?} }
 
   def as_json(options = {})
-    attributes.merge(item: Microformats2.parse(webmention_source.html).entries.first)
+    webmention_source ? attributes.merge(item: Microformats2.parse(webmention_source.html).entries.first) : attributes
   end
 
   def verified?
@@ -57,13 +57,13 @@ class Webmention < ActiveRecord::Base
   def source_links_to_target?(page)
     if URI.parse(source).host == URI.parse(target).host
       # If source and target are on the same domain, target should be relative
-      link_found = page.link_with(href: %r{#{target}|#{target.sub('http://sixtwothree.org/', '/')}}).present?
+      regex = %r{#{target}|#{target.sub('http://sixtwothree.org/', '/')}}
     else
       # Check for links to target (with or without trailing slash)
-      link_found = page.link_with(href: %r{#{target}|#{target.sub(/.*\/+?$/, '')}}).present?
+      regex = %r{#{target}|#{target.sub(/.*\/+?$/, '')}}
     end
 
-    link_found
+    page.link_with(href: regex).present?
   end
 
   def target_accepts_webmentions?(page)

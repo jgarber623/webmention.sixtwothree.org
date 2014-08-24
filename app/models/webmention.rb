@@ -26,13 +26,7 @@ class Webmention < ActiveRecord::Base
 
       update_attributes(verified_at: Time.now.utc, webmention_type: get_type(entry_properties))
 
-      webmention_source = WebmentionSource.new({
-        webmention_id: id,
-        html: source_page.body,
-        json: collection.to_json
-      })
-
-      webmention_source.save
+      WebmentionSource.where(webmention_id: id).first_or_create(html: source_page.body, json: collection.to_json)
     else
       delete
     end

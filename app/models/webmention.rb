@@ -21,12 +21,15 @@ class Webmention < ActiveRecord::Base
     source_page = agent.get(source)
 
     if target_accepts_webmentions?(agent.get(target)) && source_links_to_target?(source_page)
-      update_attribute(:verified_at, Time.now.utc)
+      collection = Microformats2.parse(source_page.body)
+      entry_properties = collection.entries.first.to_hash[:properties]
+
+      update_attributes(verified_at: Time.now.utc, webmention_type: get_type(entry_properties))
 
       webmention_source = WebmentionSource.new({
         webmention_id: id,
         html: source_page.body,
-        json: Microformats2.parse(source_page.body).to_json
+        json: collection.to_json
       })
 
       webmention_source.save
@@ -44,6 +47,18 @@ class Webmention < ActiveRecord::Base
   end
 
   private
+
+  def get_type(properties)
+    if properties.has_key?(:like_of)
+      'like'
+    elsif properties.has_key?(:in_reply_to)
+      'reply'
+    elsif properties.has_key?(:repost_of)
+      'repost'
+    else
+      'reference'
+    end
+  end
 
   def source_links_to_target?(page)
     # If source and target are on the same domain, target should be relative

@@ -6,7 +6,7 @@ class Webmention < ActiveRecord::Base
   validates :target, format: { :with => %r{\Ahttp://sixtwothree.org/?} }
 
   def as_json(options = {})
-    webmention_source ? attributes.merge(item: Microformats2.parse(webmention_source.html).entries.first) : attributes
+    webmention_source ? attributes.merge(entry: Microformats2.parse(webmention_source.html).entries.first) : attributes
   end
 
   def verified?

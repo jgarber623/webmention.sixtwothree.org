@@ -3,19 +3,25 @@ class WebmentionApp < Sinatra::Base
     before { content_type :json }
 
     get '/webmentions' do
-      if params[:target]
-        webmentions = Webmention.where(target: params[:target])
+      if params.empty?
+        response = Webmention.all
       else
-        webmentions = Webmention.all
+        target = params[:target]
+
+        if target =~ URI::regexp(%w(http https))
+          response = Webmention.where('target = ? AND verified_at IS NOT NULL', target)
+        else
+          status 400
+
+          response = { error: "'#{target}' is not a valid URL." }
+        end
       end
 
-      json webmentions
+      json response
     end
 
     get '/webmentions/:id' do
-      webmention = Webmention.where(id: params[:id])
-
-      json webmention
+      json Webmention.where(id: params[:id])
     end
   end
 end

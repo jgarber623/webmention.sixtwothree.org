@@ -44,15 +44,15 @@ A lightweight JSON API is also available. The following endpoints can be used to
 
 <table>
 	<tr>
-		<th style="text-align: left;">/api/webmentions</th>
+		<th>/api/webmentions</th>
 		<td>Returns all webmentions</td>
 	</tr>
 	<tr>
-		<th style="text-align: left;">/api/webmentions?target=:url</th>
+		<th>/api/webmentions?target=:url</th>
 		<td>Returns all webmentions where target equals :target</td>
 	</tr>
 	<tr>
-		<th style="text-align: left;">/api/webmentions/:id</th>
+		<th>/api/webmentions/:id</th>
 		<td>Returns a webmention with an ID equal to :id</td>
 	</tr>
 </table>

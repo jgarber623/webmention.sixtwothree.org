@@ -61,7 +61,7 @@ I'm using the API to pull webmentions onto post pages on my [Jekyll](http://jeky
 
 ## Deploying
 
-The application is deployed using [Capistrano](https://github.com/capistrano/capistrano/wiki) by running the command `cap environment deploy` where `environment` matches configuration files in `config/deploy` (e.g. `config/deploy/production.rb`). Deployment largely depends on your host environment, so you'll likely need to make significant changes to the Capistrano set up (or replace it entirely).
+The application is deployed using [Capistrano](https://github.com/capistrano/capistrano/wiki) by running the command `cap :environment deploy` where `:environment` matches configuration files in `config/deploy` (e.g. `config/deploy/production.rb`). Deployment largely depends on your host environment, so you'll likely need to make significant changes to the Capistrano setup (or replace it entirely).
 
 ## Acknowledgements
 

@@ -57,6 +57,8 @@ A lightweight JSON API is also available. The following endpoints can be used to
 	</tr>
 </table>
 
+I'm using the API to pull webmentions onto post pages on my [Jekyll](http://jekyllrb.com)-powered personal website, [sixtwothree.org](http://sixtwothree.org/). To do this, I'm using JavaScript to make an AJAX call to `http://webmention.sixtwothree.org/api/webmentions?target=:url`, replacing `:url` with the URL of the current post. I shuffle the returned JSON through some templates and inject the results into the page.
+
 ## Deploying
 
 The application is deployed using [Capistrano](https://github.com/capistrano/capistrano/wiki) by running the command `cap environment deploy` where `environment` matches configuration files in `config/deploy` (e.g. `config/deploy/production.rb`). Deployment largely depends on your host environment, so you'll likely need to make significant changes to the Capistrano set up (or replace it entirely).

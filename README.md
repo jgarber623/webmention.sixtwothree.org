@@ -63,7 +63,7 @@ I'm using the API to pull webmentions onto post pages on my [Jekyll](http://jeky
 
 The application is deployed using [Capistrano](https://github.com/capistrano/capistrano/wiki) by running the command `cap :environment deploy` where `:environment` matches configuration files in `config/deploy` (e.g. `config/deploy/production.rb`). Deployment largely depends on your host environment, so you'll likely need to make significant changes to the Capistrano setup (or replace it entirely).
 
-## Acknowledgements
+## Acknowledgments
 
 Thanks to everyone involved in the [IndieWeb](https://indiewebcamp.com) movement for rekindling my interest in publishing content on my own website. Special thanks to [@tpitale](https://github.com/tpitale) for his help and mentorship. I couldn't have launched this thing without him!
 
